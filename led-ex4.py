@@ -14,21 +14,22 @@ YELLOW = 17
 #GPI05
 GREEN = 5
 
+red = Pin(RED, Pin.OUT)
+yellow = Pin(YELLOW, Pin.OUT)
+green = Pin(GREEN, Pin.OUT)
 
-def ledonoff(stt, color):
-    colored = Pin(color, Pin.OUT)
+
+
+def ledonoff(stt):
     if stt == "on":
-        colored.on()
-        time.sleep(0.5)
-    if stt == "off":
-        colored.on()
-        time.sleep(0.5)
+        red.on()
+    elif stt == "off":
+        red.off()
 
-
-while True:
-    ledonoff("off", RED)
-    ledonoff("on", RED)
-    ledonoff("off", YELLOW)
-    ledonoff("on", YELLOW)
-    ledonoff("off", GREEN)
-    ledonoff("on", GREEN)
+try:
+    while True:
+        stt = input("input mode:")
+        ledonoff(stt)
+        
+except KeyboardInterrupt:
+    red.off()
