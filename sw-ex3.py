@@ -24,40 +24,43 @@ sw1 = Pin(SW1, Pin.IN)
 sw2 = Pin(SW2, Pin.IN)
 
 #Create FLag
-swflag_red = 0
-swflag_green = 0
-
+swflag = 0
+ledFlag = False
 while True:
     stt_red = sw1.value()
     stt_green = sw2.value()
-
     if stt_red == 0:
         time.sleep(0.1)
-        swflag_red += 1
-        print(swflag_red)
-        if swflag_red == 2:
+        swflag += 1
+        print(swflag)
+        if (swflag == 20) & (ledFlag == False):
             red.on()
             print("SW1 ON")
-            time.sleep(3)
+            swflag = 0
+            ledFlag = True
+
+        elif (swflag == 20) & (ledFlag == True):
             red.off()
+            print("SW1 OFF")
             swflag_red = 0
-    else:
-        swflag_red = 0
-        red.off()
-
-    if stt_green == 0:
+            ledFlag = False
+        
+    elif stt_green == 0:
         time.sleep(0.1)
-        swflag_green += 1
-        print(swflag_green)
-
-        if swflag_green == 2:
+        swflag += 1
+        print(swflag)
+        if (swflag == 20) & (ledFlag == False):
             green.on()
             print("SW2 ON")
-            time.sleep(3)
+            swflag = 0
+            ledFlag = True
 
+        elif (swflag == 20) & (ledFlag == True):
             green.off()
-            swflag_red = 0
-
+            print("SW2 OFF")
+            swflag = 0
+            ledFlag = False
+        
     else:
-        swflag_green = 0
-        green.off()
+        swflag = 0
+        

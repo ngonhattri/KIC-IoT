@@ -37,7 +37,6 @@ while True:
     else:
         red.off()
     if status2 == 0:
-        yellow.on()
         green.on()
         print("SW2 ON")
     else: 

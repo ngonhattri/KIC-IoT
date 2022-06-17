@@ -23,17 +23,17 @@ try:
         green.on()
         time.sleep(2)
         green.off()
-        time.sleep(0.1)
+        # time.sleep(0.1)
 
         yellow.on()
         time.sleep(2)        
         yellow.off()
-        time.sleep(0.1)
+        # time.sleep(0.1)
 
         red.on()
         time.sleep(2)
         red.off()
-        time.sleep(0.1)     
+        # time.sleep(0.1)     
         
 except KeyboardInterrupt:
     red.off()

@@ -21,14 +21,26 @@ green = Pin(GREEN, Pin.OUT)
 
 
 def ledonoff(stt):
+    color = input("input color:")
     if stt == "on":
-        red.on()
+        if color == "red":
+            red.on()
+        elif color == "green":
+            green.on()
+        elif color == "yellow":
+            yellow.on()
     elif stt == "off":
-        red.off()
+        if color == "red":
+            red.off()
+        elif color == "green":
+            green.off()
+        elif color == "yellow":
+            yellow.off()
+
 
 try:
     while True:
-        stt = input("input mode:")
+        stt = input("input mode:")   
         ledonoff(stt)
         
 except KeyboardInterrupt:
