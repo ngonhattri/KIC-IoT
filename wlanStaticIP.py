@@ -4,11 +4,6 @@
 import binascii
 import network
 import time
-from machine import Pin
-
-#GPI05
-GREEN = 5
-green = Pin(GREEN, Pin.OUT)
 
 # mywifistatic.py contains several information related to network.
 # You should put this file(mywifistatic.py) into ESP32
@@ -41,18 +36,15 @@ if not wlan.isconnected():
     print("Connecting WiFi.", end='')
     wlan.connect(SSID, PASS)
     time.sleep_ms(100)
+
     # wait until WiFi is connected
     while not wlan.isconnected():
         print(".", end='')
-        green.on()
-        time.sleep(0.1)
-        green.off()
-        time.sleep(0.1)
+        time.sleep_ms(200)
         pass
     print()
 
 print("Connected WiFi")
-green.on()
 
 # Set hostname
 wlan.config(dhcp_hostname=MYHOSTNAME)
@@ -69,5 +61,5 @@ macaddr = binascii.hexlify(wlan.config('mac'),':').decode()
 # Get network information and print it
 myip, mynetmask, myroute, mydns = wlan.ifconfig()
 wifiinfo = (myip, myroute, mydns, rssi, macaddr)
-print("\nMy IP: %s\nGateway: %s\nDNS: %s\nRSSI: %.1f\nMACADDR: %s" % wifiinfo)
+print("My IP: %s\nGateway: %s\nDNS: %s\nRSSI: %.1f\nMACADDR: %s" % wifiinfo)
 print("hostname:", hostname)
