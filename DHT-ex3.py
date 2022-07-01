@@ -1,7 +1,7 @@
 
 from machine import Pin
 # from plyer import battery
-import DHTex3
+
 import time
 
 SENSOR = 21
@@ -18,7 +18,7 @@ green = Pin(GREEN, Pin.OUT)
 
 
 # バッテリーの状況
-status = DHTex3.getBatteryStt
+# status = battery.get_state()
 print(status)
 
 while True:

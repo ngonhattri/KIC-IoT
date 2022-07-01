@@ -32,10 +32,17 @@ while True:
     print("temperature: "+str(temperature)+"oC AND humidity: "+str(humidity) +"%")
     print("discomfort index: "+str(discomfort))
     if discomfort < 70:
+        red.off()
+        yellow.off()
         green.on()
     elif discomfort > 80:
+        yellow.off()
+        green.off()
         red.on()
+
     else:
+        red.off()
+        green.off()
         yellow.on()
 
     time.sleep(1)
