@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>フォーム入門</title>
+</head>
+<body>
+<h1>アンケート</h1>
+<form action="/cgi-bin/enquete.py" method="post">
+	<div>e-mail: <input type="text" name="email"></div>
+
+	<div>コース:
+	<select name="course">
+		<option value="IT1"> IT1</option>
+		<option value="IT2"> IT2</option>
+		<option value="IT3" selected> IT3</option>
+		<option value="IT4"> IT4</option>
+		<option value="AI1"> Web1</option>
+		<option value="AIb2"> Web2</option>
+	</select>
+	</div>
+
+	</div>
+	<div>希望職種</div>
+	<div><input type="checkbox" name="job" value="SE">SE</div>
+	<div><input type="checkbox" name="job" value="programmer">プログラマ</div>
+	<div><input type="checkbox" name="job" value="server">サーバエンジニア</div>
+	<div><input type="checkbox" name="job" value="network">ネットワークエンジニア</div>
+	<div><input type="checkbox" name="job" value="designer">ホームページデザイナ</div>
+
+	<div>要望事項</div>
+	<div><textarea name="comment"></textarea>
+
+	<input type="hidden" name="id" value="1234567890">
+
+	<div><input type="submit" name="submit" value="送信"></div>
+	<div><input type="reset" value="リセット"></div>
+</form>
+</body>
+</html>
