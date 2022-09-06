@@ -1,11 +1,8 @@
-# Servo motor control sample program
-# Jul. 10th T.Kawamoto
-
 from machine import PWM, Pin
 import time
 
 # Servo motor is connecte to GPIO12
-SERVO_PIN = 18
+SERVO_PIN = 12
 
 # PWM frequency is 50Hz
 FREQ = 50
@@ -20,13 +17,9 @@ def servocontrol(d):
 
 try:
     while True:
-        # 103/1023 = 10% -> 90 degrees
-        #pwmduty = 103
-        pwmduty = 115
-
-        # Move to 0 degree position
+        # 117/1023 = 11% -> 90 degrees
+        pwmduty = 117
         servocontrol(pwmduty)
-
 
         # neutral position (center)
         # 77/1023 = 7.5% -> 0 degree
@@ -34,14 +27,13 @@ try:
         servocontrol(pwmduty)
 
         # 52/1023 = 5% -> -90 degrees
-        #wmduty = 52
-        pwmduty = 40
+        pwmduty = 35
         servocontrol(pwmduty)
 
         # neutral position
         pwmduty = 77
         servocontrol(pwmduty)
-            
+        
 except KeyboardInterrupt:
     print("Finished.")
     # set neutral position
