@@ -1,7 +1,5 @@
 import network
 import socket
-import sys
-import time
 
 # Default port number for WWW
 PORT = 80
