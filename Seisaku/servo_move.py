@@ -15,26 +15,28 @@ def servocontrol(d):
     servo.duty(d)
     time.sleep(1)
 
+def servo_value(degree):
+    return int((degree * 9.5 / 180 + 2.5) * 65535 / 100)
 try:
     while True:
-        # 117/1023 = 11% -> 90 degrees
-        pwmduty = 117
-        servocontrol(pwmduty)
-
-        # neutral position (center)
-        # 77/1023 = 7.5% -> 0 degree
-        pwmduty = 77
-        servocontrol(pwmduty)
-
-        # 52/1023 = 5% -> -90 degrees
-        pwmduty = 35
-        servocontrol(pwmduty)
-
-        # neutral position
-        pwmduty = 77
-        servocontrol(pwmduty)
+        #reading = sensor_adc.read_u16()
+        servo.duty_u16(servo_value(0))
+        print(servo_value(0))
+        time.sleep(1)
+        servo.duty_u16(servo_value(45))
+        print(servo_value(45))
+        time.sleep(1)
+        servo.duty_u16(servo_value(90))
+        print(servo_value(90))
+        time.sleep(1)
+        servo.duty_u16(servo_value(135))
+        print(servo_value(135))
+        time.sleep(1)
+        servo.duty_u16(servo_value(180))
+        print(servo_value(180))
+        time.sleep(1)
         
 except KeyboardInterrupt:
     print("Finished.")
     # set neutral position
-    servo.duty(77)
+    servo.duty_u16(servo_value(0))
