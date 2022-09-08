@@ -1,56 +1,29 @@
 import network
 import socket
-
 # Default port number for WWW
 PORT = 80
 switch_state = "OFF"
 # Make HTTP header and HTML contents
-def web_page():
-  html = """<html><head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <style>
-        html {
-            font-family: Arial;
-            display: inline-block;
-            margin: 0px auto;
-            text-align: center;
-        }
-
-        .button {
-            background-color: #ce1b0e;
-            border: none;
-            color: white;
-            padding: 16px 40px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-        .button1 {
-            background-color: #000000;
-        }
-    </style>
-</head>
-
-<body>
-    <h2>ESP MicroPython Web Server</h2>
-    <p>SWITCH state: <strong>""" + switch_state + """</strong></p>
-    <p>
-        <i class="fas fa-lightbulb fa-3x" style="color:#c81919;"></i>
-        <a href=\"?switch_on\"><button class="button">SWITCH ON</button></a>
-    </p>
-    <p>
-        <i class="far fa-lightbulb fa-3x" style="color:#000000;"></i>
-        <a href=\"?switch_off\"><button class="button button1">SWITCH OFF</button></a>
-    </p>
-</body>
-
-</html>"""
+html = """
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>ESP32 web server</title>
+  </head>
+  <body>
+    <h1>ESP32 switchbot</h1>
+      <form method="GET" acthon="#">
+      <div>
+          <input type="submit" name="switch" value="ON">
+      </div>
+      <div>
+          <input type="submit" name="switch" value="OFF">
+      </div>
+      </form>
+  </body>
+</html>
+"""
 # Check WiFi connection and print IP address if connected
 wlan = network.WLAN(network.STA_IF)
 if wlan.isconnected():
@@ -96,10 +69,10 @@ try:
     if buff.find("/?switch=OFF") == 4:
       print("OFF was pressed.")
 
-    response = web_page()
     cl.send('HTTP/1.1 200 OK\n')
     cl.send('Content-Type: text/html\n')
-    cl.sendall(response)
+    print()
+    cl.sendall(html)
     cl.close()
     print("Connection closed and waiting for next connection")
 
