@@ -1,5 +1,20 @@
 import network
 import socket
+from machine import PWM, Pin
+import time
+
+# Servo motor is connecte to GPIO12
+SERVO_PIN = 12
+
+# PWM frequency is 50Hz
+FREQ = 50
+
+# Make servo instance
+servo = PWM(Pin(SERVO_PIN), freq = FREQ)
+
+def servo_value(degree):
+    return int((degree * 9.5 / 180 + 2.5) * 65535 / 100)
+    
 # Default port number for WWW
 PORT = 80
 switch_state = "OFF"
@@ -64,10 +79,13 @@ try:
     
     # Check which button was pressed
     if buff.find("/?switch=ON") == 4:
+      servo.duty_u16(servo_value(0))
+      print(servo_value(0))
       print("ON was pressed.")
 
     if buff.find("/?switch=OFF") == 4:
-      print("OFF was pressed.")
+      servo.duty_u16(servo_value(90))
+      print("ON was pressed.")
 
     cl.send('HTTP/1.1 200 OK\n')
     cl.send('Content-Type: text/html\n')
